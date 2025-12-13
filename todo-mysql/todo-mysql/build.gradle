@@ -1,0 +1,76 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.5.8'
+    id 'io.spring.dependency-management' version '1.1.7'
+    // 다양한 언어를 위한 코드 포매터와 관련 태스크 제공(예: spotlessApply)
+    id 'com.diffplug.spotless' version '6.25.0'
+}
+
+group = 'com.asdf'
+version = '0.0.1-dev'
+description = 'Demo project for Spring Boot'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Spring Data JPA 스타터 의존성을 추가합니다.
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    // Swagger UI를 사용하기 위한 의존성을 추가합니다.
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.14'
+    // MySQL JDBC 드라이버 의존성을 추가합니다.
+    implementation 'mysql:mysql-connector-java:8.0.32'
+    // Lombok 라이브러리를 컴파일 시에만 사용하도록 설정합니다.
+    // Getter, Setter 등을 자동으로 생성해줍니다.
+    compileOnly 'org.projectlombok:lombok'
+    // Lombok이 제공하는 기능을 사용하기 위한 어노테이션 프로세서를 추가합니다.
+    annotationProcessor 'org.projectlombok:lombok'
+    // JUnit 5를 이용한 테스트를 위한 의존성을 추가합니다.
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    // Import TestContainers for JUnit 5
+    // 임시 MySQL 컨테이너를 생성하여 유닛테스트를 수행하기 위한 의존성을 추가합니다.
+    testImplementation 'org.testcontainers:junit-jupiter:1.20.1'
+    testImplementation 'org.testcontainers:testcontainers:1.20.1'
+    testImplementation 'org.testcontainers:mysql:1.20.1'
+    // JUnit 5 테스트를 실행하기 위한 런타임 의존성을 추가합니다.
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+
+    // 테스트 실행 시 상세한 결과 출력 활성화
+    testLogging {
+        // 테스트 이벤트 중 어떤 것을 로그로 출력할지 설정
+        events "passed", "skipped", "failed"
+        // 테스트 케이스 별 결과를 항상 출력하도록 설정
+        outputs.upToDateWhen { false }
+        // Java Agent 경고 메시지 억제
+        jvmArgs '-XX:+EnableDynamicAgentLoading'
+    }
+}
+
+// Spotless 플러그인을 사용하여 코드 양식을 자동으로 맞춰줍니다.
+spotless {
+    // Java 파일에 대한 포맷팅 설정을 추가합니다.
+    java {
+        // Google Java Format 적용
+        googleJavaFormat('1.22.0').reflowLongStrings()
+    }
+}
+
+build.dependsOn 'spotlessApply'
