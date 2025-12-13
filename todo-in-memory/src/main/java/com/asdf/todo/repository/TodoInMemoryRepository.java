@@ -10,26 +10,26 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class TodoInMemoryRepository {
-    private final Map<Long, Todo> todoMap = new HashMap<>();
-    private final AtomicLong counter = new AtomicLong();
+  private final Map<Long, Todo> todoMap = new HashMap<>();
+  private final AtomicLong counter = new AtomicLong();
 
-    public List<Todo> findAll() {
-        return new ArrayList<>(todoMap.values());
-    }
+  public List<Todo> findAll() {
+    return new ArrayList<>(todoMap.values());
+  }
 
-    public Todo findById(long id) {
-        return todoMap.get(id);
-    }
+  public Todo findById(Long id) {
+    return todoMap.get(id);
+  }
 
-    public Todo save(Todo todo) {
-        if (todo.getId() == null) {
-            todo.setId(counter.incrementAndGet());
-        }
-        todoMap.put(todo.getId(), todo);
-        return todo;
+  public Todo save(Todo todo) {
+    if (todo.getId() == null) {
+      todo.setId(counter.incrementAndGet());
     }
+    todoMap.put(todo.getId(), todo);
+    return todo;
+  }
 
-    public void deleteById(long id) {
-        todoMap.remove(id);
-    }
+  public void deleteById(Long id) {
+    todoMap.remove(id);
+  }
 }

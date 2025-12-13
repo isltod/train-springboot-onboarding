@@ -9,8 +9,8 @@ import lombok.NonNull;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Todo {
-    private Long id;
-    @NonNull private String title;
-    private String description;
-    private boolean completed;
+  private Long id;
+  @NonNull private String title;
+  private String description;
+  private boolean completed;
 }

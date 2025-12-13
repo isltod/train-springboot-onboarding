@@ -7,13 +7,14 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class ApiDocumentationConfig {
-    @Bean
-    public OpenAPI apiDocumentation() {
-        return new OpenAPI()
-                .info(
-                        new Info()
-                                .title("Todos List API")
-                                .version("1.0")
-                                .description("Spring Boot 3를 이용한 Todos List API 문서"));
-    }
+
+  @Bean
+  public OpenAPI apiDocumentation() {
+    return new OpenAPI()
+        .info(
+            new Info()
+                .title("To-Do List API")
+                .version("1.0")
+                .description("Spring Boot3를 이용한 To-Do List API 문서"));
+  }
 }
