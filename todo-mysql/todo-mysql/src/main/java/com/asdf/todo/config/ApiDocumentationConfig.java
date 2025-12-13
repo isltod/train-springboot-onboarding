@@ -14,7 +14,7 @@ public class ApiDocumentationConfig {
         .info(
             new Info()
                 .title("To-Do List API")
-                .version("1.0")
-                .description("Spring Boot3를 이용한 To-Do List API 문서"));
+                .version("2.0")
+                .description("Spring Boot 3를 이용한 To-Do List API 문서"));
   }
 }
