@@ -17,11 +17,11 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+
 /*
 
 
 */
-
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(TodoController.class)
@@ -29,9 +29,7 @@ public class TodoControllerTests {
 
     @Autowired private MockMvc mockMvc;
 
-    @MockitoBean
-    private TodoService todoService;
-
+    @MockitoBean private TodoService todoService;
 
     @Test
     public void testGetTodoById() throws Exception {
@@ -41,8 +39,7 @@ public class TodoControllerTests {
 
         given(todoService.findById(1L)).willReturn(todo);
 
-        mockMvc.perform(get("/api/todos/v1/1")
-                        .accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/api/todos/v1/1").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1L))
                 .andExpect(jsonPath("$.title").value("Test Todo"));
@@ -59,8 +56,7 @@ public class TodoControllerTests {
                 .willReturn(
                         Collections.singletonList(
                                 // 여기 Description은 넣어준 적이 없는데? LomBok이 생성자에서 넣어주나?
-                                new Todo(1L, "Test Todo", "Description", false))
-                );
+                                new Todo(1L, "Test Todo", "Description", false)));
 
         mockMvc.perform(get("/api/todos/v1").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -105,8 +101,7 @@ public class TodoControllerTests {
                                 .content("{\"title\": \"Updated Todo\"}"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1L))
-                .andExpect(jsonPath("$.title").value("Updated Todo")
-                );
+                .andExpect(jsonPath("$.title").value("Updated Todo"));
     }
 
     @Test
