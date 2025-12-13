@@ -100,6 +100,37 @@ Servers
 hs_err_pid*
 replay_pid*
 
+# Gradle
+.gradle/                 # Directory used by Gradle for operational files
+build/                   # Directory for compiled output files
+
+# Dependency caches
+.m2/                     # Maven local repository cache
+.gradle/cache
+.idea/libraries          # IntelliJ generated library definitions
+
+# Generated files
+*.class                  # Compiled Java class files
+*.jar                    # Packaged JAR files (unless it's a wrapper JAR, see below)
+*.war
+*.ear
+*.apk
+*.iml                    # IntelliJ IDEA project files
+
+# Local configuration files (IDE specific)
+.idea/                   # IntelliJ IDEA project configuration directory
+.vscode/                 # VS Code configuration directory
+.project                 # Eclipse project files
+.settings/               # Eclipse project settings
+.lifecycle/
+*.xcworkspace/           # Xcode workspace files
+!*.xcworkspace/*.xcscheme/
+*.xcuserdatad/
+
+# System Files
+.DS_Store                # macOS system files
+Thumbs.db                # Windows system files
+
 # End of https://www.toptal.com/developers/gitignore/api/java,eclipse
 
 # Gradle
