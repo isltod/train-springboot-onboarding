@@ -61,6 +61,15 @@ public class ArticleService {
     }
 
     @Transactional(readOnly = true)
+    public ArticleResponseDto getArticleById(Long articleId) {
+        Article article = articleRepository.findById(articleId)
+                .orElseThrow(() -> new ArticleNotFoundException(
+                        String.format("해당 아이디(%d)를 가진 게시글을 찾을 수 없습니다.", articleId)
+                ));
+        return EntityDtoMapper.toDto(article);
+    }
+
+    @Transactional(readOnly = true)
     public List<ArticleResponseDto> getFeedListByFollowerId(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new UserNotFoundException(
