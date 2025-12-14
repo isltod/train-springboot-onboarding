@@ -1,0 +1,21 @@
+package com.asdf.minilog.config;
+
+import com.asdf.minilog.service.ArticleService;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class ApiDocumentationConfig {
+    @Bean
+    public OpenAPI customOpenAPI() {
+        return new OpenAPI()
+                .info(
+                        new Info()
+                                .title("Minilog API")
+                                .version("1.0")
+                                .description("API Documentation for the Minilog project")
+                );
+    }
+}
